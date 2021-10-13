@@ -14,7 +14,7 @@ const EmployeeDashboard = (props) => {
     useEffect(() => {
         setIsLoading(true);
         axios
-        .post(`${URL}reimb.by-user.list`, user)
+        .post(`${URL}by-user-id.reimb-list`, user)
         .then((res) => {
             const data = res.data;
             console.log(data);

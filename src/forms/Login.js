@@ -34,7 +34,7 @@ const Login = (props) => {
           } else {
             myHooks.setIsLoading(true);
             axios
-            .post(`${URL}user.login.check`, userData)
+            .post(`${URL}login.user`, userData)
             .then((res) => {
                 const data = res.data;
                 console.log(data);

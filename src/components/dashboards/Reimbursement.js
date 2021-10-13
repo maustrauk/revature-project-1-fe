@@ -56,7 +56,7 @@ const Reimbursement = (props) => {
         const approvedReimb = {...reimb, reimbStatusId: 1}
         myHooks.setIsLoading(true);
         axios
-            .post(`${URL}reimb.update.list`, approvedReimb)
+            .post(`${URL}update.reimb-list`, approvedReimb)
             .then((res) => {
                 const data = res.data;
                 console.log("Data:",data);
@@ -75,10 +75,24 @@ const Reimbursement = (props) => {
    
     const onClickDeny = (event) => {
         event.preventDefault();
-    } 
-
-    const onClickDelete = (event) => {
-        event.preventDefault();
+        const deniedReimb = {...reimb, reimbStatusId: 2}
+        myHooks.setIsLoading(true);
+        axios
+            .post(`${URL}update.reimb-list`, deniedReimb)
+            .then((res) => {
+                const data = res.data;
+                console.log("Data:",data);
+                if (data != null) {
+                    myHooks.setReimbList(data);
+                }
+                myHooks.setIsLoading(false);
+                push('/dashboard');
+            })
+            .catch((err) => {
+                console.log(err);
+                myHooks.setIsLoading(false);
+                push('/dashboard');
+            });
     } 
 
     return (
@@ -96,17 +110,11 @@ const Reimbursement = (props) => {
             </Card.Text>
         </Card.Body>
         <Card.Footer className="text-muted">{reimb.reimbReceipt !== null ? "Receipt attached" : null}</Card.Footer>
-        {myHooks.user.userRoleId === 2 ?
+        {(myHooks.user.userRoleId === 2 && reimb.reimbStatusId === 3) ?
             <div>
-                {reimb.reimbStatusId === 3 ?
-                    <div>
-                        <Button variant="primary" onClick={onClickApprove}>Approve</Button>
-                        <Button variant="primary" onClick={onClickDeny}>Deny</Button>
-                    </div> : null
-                }
-                <Button variant="primary" onClick={onClickDelete}>Delete</Button>
-            </div>:
-            null
+                <Button variant="primary" onClick={onClickApprove}>Approve</Button>
+                <Button variant="primary" onClick={onClickDeny}>Deny</Button>
+            </div> : null
         }
         </Card>
         {managerFunc}

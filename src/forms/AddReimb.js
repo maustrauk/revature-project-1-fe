@@ -41,7 +41,7 @@ const AddReimb = (props) => {
             setIsLoading(true);
             console.log("reimbData:", reimbData);
             axios
-            .post(`${URL}reimb.add.list`, reimbData)
+            .post(`${URL}add.reimb-list`, reimbData)
             .then((res) => {
                 const data = res.data;
                 console.log("Data:",data);

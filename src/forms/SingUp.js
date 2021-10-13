@@ -39,7 +39,7 @@ const SignUp = (props) => {
           } else {
             myHooks.setIsLoading(true);
             axios
-            .post(`${URL}user.signup.check`, userData)
+            .post(`${URL}signup.user`, userData)
             .then((res) => {
                 const data = res.data;
                 console.log(data);

@@ -13,7 +13,7 @@ const ManagerDashboard = (props) => {
     useEffect(() => {
         setIsLoading(true);
         axios
-        .post(`${URL}reimb.by-manager.list`, user)
+        .post(`${URL}by-manager-id.reimb-list`, user)
         .then((res) => {
             const data = res.data;
             console.log(data);
