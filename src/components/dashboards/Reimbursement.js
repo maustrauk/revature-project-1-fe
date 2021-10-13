@@ -14,6 +14,8 @@ const Reimbursement = (props) => {
     const {reimb, managerFunc, myHooks} = props;
     const {isPending, isApproved, isDenied} = myHooks;
 
+    const reimbUser = myHooks.emplList.filter(e => e.userId === reimb.reimbAuthor)[0];
+
     const rType = {
         1: "Lodging",
         2: "Travel",
@@ -51,9 +53,8 @@ const Reimbursement = (props) => {
         }
     }
 
-    const onClickApprove = (event) => {
-        event.preventDefault();
-        const approvedReimb = {...reimb, reimbStatusId: 1}
+    const setThisStatusId = (id) => {
+        const approvedReimb = {...reimb, reimbStatusId: id}
         myHooks.setIsLoading(true);
         axios
             .post(`${URL}update.reimb-list`, approvedReimb)
@@ -71,36 +72,24 @@ const Reimbursement = (props) => {
                 myHooks.setIsLoading(false);
                 push('/dashboard');
             });
+    }
+
+    const onClickApprove = (event) => {
+        event.preventDefault();
+        setThisStatusId(1);
     } 
    
     const onClickDeny = (event) => {
         event.preventDefault();
-        const deniedReimb = {...reimb, reimbStatusId: 2}
-        myHooks.setIsLoading(true);
-        axios
-            .post(`${URL}update.reimb-list`, deniedReimb)
-            .then((res) => {
-                const data = res.data;
-                console.log("Data:",data);
-                if (data != null) {
-                    myHooks.setReimbList(data);
-                }
-                myHooks.setIsLoading(false);
-                push('/dashboard');
-            })
-            .catch((err) => {
-                console.log(err);
-                myHooks.setIsLoading(false);
-                push('/dashboard');
-            });
-    } 
+        setThisStatusId(2);
+    }
 
     return (
     <div className={isDisplayed()}>
        <Card>
        {myHooks.user.userRoleId === 1 ?
             <Card.Header>Status: {rStatus[reimb.reimbStatusId]}</Card.Header> :
-            <Card.Header>UserId: {reimb.reimbAuthor} Status: {rStatus[reimb.reimbStatusId]}</Card.Header>
+            <Card.Header>UserName: {reimbUser.userName} Status: {rStatus[reimb.reimbStatusId]}</Card.Header>
        }
         <Card.Body>
             <Card.Title>{rType[reimb.reimbTypeId]}</Card.Title>

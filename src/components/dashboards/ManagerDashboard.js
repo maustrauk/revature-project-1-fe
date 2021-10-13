@@ -8,7 +8,7 @@ import Reimbursements from './Reimbursements';
 
 const ManagerDashboard = (props) => {
 
-    const {user, isLoading, setIsLoading, setReimbList} = props.myHooks;
+    const {user, isLoading, setIsLoading, setReimbList, setEmplList} = props.myHooks;
 
     useEffect(() => {
         setIsLoading(true);
@@ -18,6 +18,20 @@ const ManagerDashboard = (props) => {
             const data = res.data;
             console.log(data);
             setReimbList(data);
+            setIsLoading(false);
+        },)
+        .catch((er) => {
+            console.log(er);
+            setIsLoading(false);
+        });
+
+        setIsLoading(true);
+        axios
+        .post(`${URL}empl.user-list`, user)
+        .then((res) => {
+            const data = res.data;
+            console.log(data);
+            setEmplList(data);
             setIsLoading(false);
         },)
         .catch((er) => {
