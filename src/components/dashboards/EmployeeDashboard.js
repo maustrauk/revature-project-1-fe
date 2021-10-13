@@ -9,9 +9,6 @@ import Reimbursements from './Reimbursements';
 
 const EmployeeDashboard = (props) => {
 
-
-    
-
     const {user, isLoading, setIsLoading, setReimbList} = props.myHooks;
 
     useEffect(() => {

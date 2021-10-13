@@ -24,7 +24,8 @@ const AddReimb = (props) => {
         reimbReceipt: "",
         reimbAuthor: user.userId,
         reimbResolver: "",
-        reimbTypeId: 1
+        reimbTypeId: 1,
+        reimbStatusId: ""
     }
 
     const [validated, setValidated] = useState(false);
