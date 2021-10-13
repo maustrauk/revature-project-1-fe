@@ -43,8 +43,8 @@ const AddReimb = (props) => {
             .post(`${URL}reimb.add.list`, reimbData)
             .then((res) => {
                 const data = res.data;
-                console.log(data);
-                if (data !== "Wrong credentials") {
+                console.log("Data:",data);
+                if (data !== null) {
                     setWrongCred(false);
                     setIsLoading(false);
                     push('/dashboard');
@@ -131,7 +131,7 @@ const AddReimb = (props) => {
                                         <Form.Control type="text" name="reimbResolver" placeholder="Manager User Name" value={reimbData.reimbResolver} onChange={changeHandler}  required/>
                                     </Form.Group>
                         </Container>
-                        {wrongCred ? <p className="errors">Some errors</p> : null}
+                        {wrongCred ? <p className="errors">Wrong Manager User Name</p> : null}
                         <hr className="my-4"/>
                         <Container className="buttons">
                             <Button variant="primary" type="submit">

@@ -43,7 +43,7 @@ const SignUp = (props) => {
             .then((res) => {
                 const data = res.data;
                 console.log(data);
-                if (data !== "Wrong credentials") {
+                if (data !== null) {
                     myHooks.setWrongCred(false);
                     myHooks.setIsLoading(false);
                     push('/');
@@ -70,6 +70,7 @@ const SignUp = (props) => {
 
     const onBackClick = (event) => {
         event.preventDefault();
+        myHooks.setWrongCred(false);
         push('/');
     }
 

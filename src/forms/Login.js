@@ -38,7 +38,7 @@ const Login = (props) => {
             .then((res) => {
                 const data = res.data;
                 console.log(data);
-                if (data !== "Wrong credentials") {
+                if (data !== null) {
                     const user = {
                         userId: data.userId,
                         userName: data.userName,
