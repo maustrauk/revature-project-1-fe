@@ -11,21 +11,21 @@ import { useHistory } from "react-router";
 
 import Loading from "../components/Loading";
 
-const initialReimb = {
-    reimbAmount: "",
-    reimbDescription: "",
-    reimbReceipt: "",
-    reimbAuthor: "",
-    reimbResolver: "",
-    reimbStatusId: "",
-    reimbTypeId: ""
-}
 
 const AddReimb = (props) => {
 
-    const {user, setReimbList, isLoading, setIsLoading, wrongCred, setWrongCred} = props.myHooks;
+    const {user, isLoading, setIsLoading, wrongCred, setWrongCred} = props.myHooks;
 
     const {push} = useHistory();
+
+    const initialReimb = {
+        reimbAmount: "",
+        reimbDescription: "",
+        reimbReceipt: "",
+        reimbAuthor: user.userId,
+        reimbResolver: "",
+        reimbTypeId: 1
+    }
 
     const [validated, setValidated] = useState(false);
     const [reimbData, setReimbData] = useState(initialReimb);
@@ -38,8 +38,9 @@ const AddReimb = (props) => {
             event.stopPropagation();
           } else {
             setIsLoading(true);
+            console.log("reimbData:", reimbData);
             axios
-            .post(`${URL}user.signup.check`, reimbData)
+            .post(`${URL}reimb.add.list`, reimbData)
             .then((res) => {
                 const data = res.data;
                 console.log(data);
@@ -64,8 +65,17 @@ const AddReimb = (props) => {
     }
 
     const changeHandler = (event) => {
-        const {name, value} = event.target;
-        setReimbData({...reimbData, [name]: value});    
+        const {name, value, type, checked} = event.target;
+        let correctValue = value;
+        if (type === "checkbox") {
+            correctValue = checked;
+        }
+        if (type === "file") {
+            const tempStringArr = value.split("\\");
+            const tempString = tempStringArr[tempStringArr.length - 1];
+            correctValue = tempString;
+        }
+        setReimbData({...reimbData, [name]: correctValue});    
     }
 
     const onBackClick = (event) => {
@@ -97,22 +107,22 @@ const AddReimb = (props) => {
                                 <Form.Label className="form-label">
                                    Reimbursement Type:
                                 </Form.Label>
-                                <Form.Check type="radio" name="reimbTypeId" value={1} label="LODGING" checked/>
-                                <Form.Check type="radio" name="reimbTypeId" value={2} label="TRAVEL" />
-                                <Form.Check type="radio" name="reimbTypeId" value={3} label="FOOD" />
-                                <Form.Check type="radio" name="reimbTypeId" value={4} label="OTHER" />
+                                <Form.Check type="radio" name="reimbTypeId" onChange={changeHandler} value={1} label="LODGING" checked/>
+                                <Form.Check type="radio" name="reimbTypeId" onChange={changeHandler} value={2} label="TRAVEL" />
+                                <Form.Check type="radio" name="reimbTypeId" onChange={changeHandler} value={3} label="FOOD" />
+                                <Form.Check type="radio" name="reimbTypeId" onChange={changeHandler} value={4} label="OTHER" />
                             </Form.Group>
                             <Form.Group className="col-12">
                                 <Form.Label className="form-label">
                                    Description:
                                 </Form.Label>
-                                <Form.Control as="textarea" name="reimbDescription" maxlength="250" rows="5" value={reimbData.reimbDescription} onChange={changeHandler}/>
+                                <Form.Control as="textarea" name="reimbDescription" maxLength="250" rows="5" value={reimbData.reimbDescription} onChange={changeHandler}/>
                             </Form.Group>
                             <Form.Group className="col-12">
                                 <Form.Label className="form-label">
                                    Reciept:
                                 </Form.Label>
-                                <Form.Control type="file" name="reimbReceipt"/>
+                                <Form.Control type="file" name="reimbReceipt" onChange={changeHandler}/>
                             </Form.Group>
                             <Form.Group className="col-12">
                                         <Form.Label className="form-label">
