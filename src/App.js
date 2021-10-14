@@ -25,6 +25,7 @@ function App() {
   const [isPending, setIsPending] = useState(false);
   const [isApproved, setIsApproved] = useState(false);
   const [isDenied, setIsDenied] = useState(false);
+  const [emplList, setEmplList] = useState([]);
 
   
   const myHooks = {
@@ -42,6 +43,8 @@ function App() {
     setIsApproved: setIsApproved,
     isDenied: isDenied,
     setIsDenied: setIsDenied,
+    emplList: emplList,
+    setEmplList: setEmplList
   }
 
   return (

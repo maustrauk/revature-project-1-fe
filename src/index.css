@@ -51,3 +51,6 @@ code {
   margin-right: 1%;
 }
 
+.errors {
+  color: red;
+}

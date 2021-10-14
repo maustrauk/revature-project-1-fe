@@ -59,7 +59,10 @@ const DashNavbar = (props) => {
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
                         <Nav.Link disabled>Reimbursement  Action:</Nav.Link>
-                        <Nav.Link  href="#" onClick={onAddClick}>Add</Nav.Link>
+                        {user.userRoleId === 1 ? 
+                            <Nav.Link  href="#" onClick={onAddClick}>Add</Nav.Link> :
+                            null
+                        }
                         <Nav.Link  href="#" onClick={onPendingClick}>Show Pending</Nav.Link>
                         <Nav.Link  href="#" onClick={onDeniedClick}>Show Denied</Nav.Link>
                         <Nav.Link  href="#" onClick={onApprovedClick}>Show Approved</Nav.Link>

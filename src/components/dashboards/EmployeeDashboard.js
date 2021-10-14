@@ -9,15 +9,12 @@ import Reimbursements from './Reimbursements';
 
 const EmployeeDashboard = (props) => {
 
-
-    
-
     const {user, isLoading, setIsLoading, setReimbList} = props.myHooks;
 
     useEffect(() => {
         setIsLoading(true);
         axios
-        .post(`${URL}reimb.by-user.list`, user)
+        .post(`${URL}by-user-id.reimb-list`, user)
         .then((res) => {
             const data = res.data;
             console.log(data);

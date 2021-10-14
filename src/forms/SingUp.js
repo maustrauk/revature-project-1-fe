@@ -39,11 +39,11 @@ const SignUp = (props) => {
           } else {
             myHooks.setIsLoading(true);
             axios
-            .post(`${URL}user.signup.check`, userData)
+            .post(`${URL}signup.user`, userData)
             .then((res) => {
                 const data = res.data;
                 console.log(data);
-                if (data !== "Wrong credentials") {
+                if (data !== null) {
                     myHooks.setWrongCred(false);
                     myHooks.setIsLoading(false);
                     push('/');
@@ -70,6 +70,7 @@ const SignUp = (props) => {
 
     const onBackClick = (event) => {
         event.preventDefault();
+        myHooks.setWrongCred(false);
         push('/');
     }
 
