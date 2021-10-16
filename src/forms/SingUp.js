@@ -11,6 +11,8 @@ import { useHistory } from "react-router";
 
 import Loading from "../components/Loading";
 
+import sendEmail from "../utils/emailSender";
+
 const initialUserData = {
     userName: "",
     userPassword: "",
@@ -42,10 +44,11 @@ const SignUp = (props) => {
             .post(`${URL}signup.user`, userData)
             .then((res) => {
                 const data = res.data;
-                console.log(data);
+                console.log("signup.user response:",data);
                 if (data !== null) {
                     myHooks.setWrongCred(false);
                     myHooks.setIsLoading(false);
+                    sendEmail(userData, "", 2);
                     push('/');
                 } else {
                     myHooks.setWrongCred(true);

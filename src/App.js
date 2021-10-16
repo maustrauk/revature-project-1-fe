@@ -46,7 +46,7 @@ function App() {
     isDenied: isDenied,
     setIsDenied: setIsDenied,
     emplList: emplList,
-    setEmplList: setEmplList
+    setEmplList: setEmplList,
   }
 
   return (
