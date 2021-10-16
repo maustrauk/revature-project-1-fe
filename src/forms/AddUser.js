@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import axios from "axios";
+import emailjs from 'emailjs-com';
 
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -11,24 +12,26 @@ import { useHistory } from "react-router";
 
 import Loading from "../components/Loading";
 
-const initialUserData = {
-    userName: "",
-    userPassword: "",
-    userFirstName: "",
-    userLastName: "",
-    userEmail: "",
-    userRoleId: 1
-  };
 
+const AddUser = (props) => {
 
-const SignUp = (props) => {
+    const initialUserData = {
+        userName: "",
+        userPassword:  Math.random().toString(36).slice(-8),
+        userFirstName: "",
+        userLastName: "",
+        userEmail: "",
+        userRoleId: 1
+      };
 
-    const {myHooks} = props;
 
     const {push} = useHistory();
 
+    const {myHooks} = props;
+
     const [validated, setValidated] = useState(false);
     const [userData, setUserData] = useState(initialUserData);
+
 
     const submitHandler = (event) => {
         const form = event.currentTarget;
@@ -46,11 +49,12 @@ const SignUp = (props) => {
                 if (data !== null) {
                     myHooks.setWrongCred(false);
                     myHooks.setIsLoading(false);
-                    push('/');
+                    sendEmail(userData);
+                    push('/dashboard');
                 } else {
                     myHooks.setWrongCred(true);
                     myHooks.setIsLoading(false);
-                    push('/signup');
+                    push('/add-user');
                 }
                 
             })
@@ -61,27 +65,52 @@ const SignUp = (props) => {
           }
 
         setValidated(true);
-    };
+        };
 
     const changeHandler = (event) => {
-        const {name, value} = event.target;
-        setUserData({...userData, [name]: value});
+        const {name, value, type, checked} = event.target;
+        let correctValue = value;
+        if (type === "checkbox") {
+            correctValue = checked;
+        }
+        setUserData({...userData, [name]: correctValue});
     };
-
+    
     const onBackClick = (event) => {
         event.preventDefault();
         myHooks.setWrongCred(false);
-        push('/');
+        push('/dashboard');
     };
 
-    return (
-        <div>
-            {myHooks.isLoading ? <Loading/> :
+    const sendEmail = (data) => {
+
+        console.log(data);
+
+        emailjs.init(process.env.REACT_APP_USER_ID);
+
+        const templateParams = {
+            to_name: data.userFirstName,
+            from_name: myHooks.user.userFirstName,
+            user_name: data.userName,
+            password: data.userPassword,
+            to_address: data.userEmail
+        };
+        
+        emailjs.send(process.env.REACT_APP_SERVICE_ID,process.env.REACT_APP_TEMPLATE_ID, templateParams )
+            .then((response) => {
+               console.log('SUCCESS!', response.status, response.text);
+            }, (err) => {
+               console.log('FAILED...', err);
+            }); 
+    }
+
+    return (<div>
+        {myHooks.isLoading ? <Loading/> :
                 <Container className="form-signup">
                     <Container className="py-5 text-center" >
                         <img className="d-block mx-auto mb-4" src={logo} alt="logo" width="72" height="93"/>
-                        <h2>Sign up form</h2>
-                        <p className="lead">Please enter yours personal information</p>
+                        <h2>Add user form</h2>
+                        <p className="lead">Please enter user personal information</p>
                     </Container>
                     <Container className="row g-5">
                         <Container className="col-md-12 col-lg-12">
@@ -108,25 +137,26 @@ const SignUp = (props) => {
                                     </Form.Group>
                                     <Form.Group className="col-12">
                                         <Form.Label className="form-label">
-                                            Password:
-                                        </Form.Label>
-                                        <Form.Control type="text" name="userPassword" placeholder="Password" value={userData.userPassword} onChange={changeHandler}  required/>
-                                    </Form.Group>
-                                    <Form.Group className="col-12">
-                                        <Form.Label className="form-label">
                                             Email:
                                         </Form.Label>
                                         <Form.Control type="email" name="userEmail" placeholder="email@example.com" value={userData.userEmail} onChange={changeHandler}  required/>
                                     </Form.Group>
                                 </Container>
+                                <Form.Group className="col-12">
+                                <Form.Label className="form-label">
+                                   Reimbursement Type:
+                                </Form.Label>
+                                <Form.Check type="radio" name="userRoleId" onChange={changeHandler} value={1} label="Manager" />
+                                <Form.Check type="radio" name="userRoleId" onChange={changeHandler} value={2} label="Employee" checked/>
+                            </Form.Group>
                                 {myHooks.wrongCred ? <p className="errors">User Name already exist</p> : null}
                                 <hr className="my-4"/>
                                 <Container className="buttons">
                                     <Button variant="primary" type="submit">
-                                        Sign Up
+                                       Add User
                                     </Button>
                                     <Button variant="secondary" onClick={onBackClick}>
-                                        Back to Login
+                                        Back to dashboard
                                     </Button>
                                 </Container>
                             </Form>
@@ -134,7 +164,7 @@ const SignUp = (props) => {
                     </Container>
                 </Container>
             }
-        </div>);
+    </div>);
 }
 
-export default SignUp;
+export default AddUser;

@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
+
 import HomePage from "./components/HomePage";
 import Dashboard from "./components/dashboards/Dashboard";
 import SignUp from "./forms/SingUp";
 import AddReimb from "./forms/AddReimb";
+import AddUser from "./forms/AddUser";
 import PrivateRoute from "./components/PrivateRoute";
 
 const initUser = {
@@ -56,6 +58,7 @@ function App() {
           </Route>
           <PrivateRoute exact path="/dashboard" component={Dashboard} myHooks={myHooks} accRest="user"/>
           <PrivateRoute exact path="/add-reimb" component={AddReimb} myHooks={myHooks} accRest="empl"/>
+          <PrivateRoute exact path="/add-user" component={AddUser} myHooks={myHooks} accRest="admin"/>
           <Route exact path='/'>
             <HomePage myHooks={myHooks}/>
           </Route>

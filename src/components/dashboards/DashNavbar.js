@@ -48,6 +48,12 @@ const DashNavbar = (props) => {
         setIsApproved(true);
     }
 
+    const onAddUserClick = (event) => {
+        event.preventDefault();
+        setAll(false);
+        push('/add-user');
+    }
+
 
 
     return (
@@ -58,11 +64,11 @@ const DashNavbar = (props) => {
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
+                        {user.userRoleId === 2 ?
+                        <Nav.Link  href="#" onClick={onAddUserClick}>Add User</Nav.Link> : null} 
                         <Nav.Link disabled>Reimbursement  Action:</Nav.Link>
                         {user.userRoleId === 1 ? 
-                            <Nav.Link  href="#" onClick={onAddClick}>Add</Nav.Link> :
-                            null
-                        }
+                            <Nav.Link  href="#" onClick={onAddClick}>Add</Nav.Link> :null}
                         <Nav.Link  href="#" onClick={onPendingClick}>Show Pending</Nav.Link>
                         <Nav.Link  href="#" onClick={onDeniedClick}>Show Denied</Nav.Link>
                         <Nav.Link  href="#" onClick={onApprovedClick}>Show Approved</Nav.Link>
