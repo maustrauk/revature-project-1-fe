@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button';
 import { URL } from "../../utils/backend";
 import { useHistory } from 'react-router';
 
-import ReceiptModal from '../ReceiptModal';
+import ReceiptModal from '../modals/ReceiptModal';
 
 const Reimbursement = (props) => {
 
@@ -102,7 +102,7 @@ const Reimbursement = (props) => {
        }
         <Card.Body>
             <Card.Title>{rType[reimb.reimbTypeId]}</Card.Title>
-            <Card.Subtitle className="mb-2 text-muted">{reimb.reimbSubmitted}</Card.Subtitle>
+            <Card.Subtitle className="mb-2 text-muted">Last updated: {reimb.reimbSubmitted}</Card.Subtitle>
             <Card.Text>
                 Description: {reimb.reimbDescription}
             </Card.Text>

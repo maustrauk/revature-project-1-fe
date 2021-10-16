@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import { useHistory } from 'react-router';
 
+import EditUserModal from '../modals/EditUserModal';
+
 const DashNavbar = (props) => {
 
-    const {user, setIsPending, setIsApproved, setIsDenied} = props.myHooks;
+    const {user, setUser, setIsPending, setIsApproved, setIsDenied} = props.myHooks;
 
     const {push} = useHistory();
+
+    const [showUser, setShowUser] = useState(false);
 
     const setAll = (status) => {
         setIsPending(status);
@@ -54,6 +58,12 @@ const DashNavbar = (props) => {
         push('/add-user');
     }
 
+    const onUserNameClick = (event) => {
+        event.preventDefault();
+        setAll(false);
+        setShowUser(true);
+    }
+
 
 
     return (
@@ -68,13 +78,14 @@ const DashNavbar = (props) => {
                         <Nav.Link  href="#" onClick={onAddUserClick}>Add User</Nav.Link> : null} 
                         <Nav.Link disabled>Reimbursement  Action:</Nav.Link>
                         {user.userRoleId === 1 ? 
-                            <Nav.Link  href="#" onClick={onAddClick}>Add</Nav.Link> :null}
+                            <Nav.Link  href="#" onClick={onAddClick}>Add </Nav.Link> :null}
                         <Nav.Link  href="#" onClick={onPendingClick}>Show Pending</Nav.Link>
                         <Nav.Link  href="#" onClick={onDeniedClick}>Show Denied</Nav.Link>
                         <Nav.Link  href="#" onClick={onApprovedClick}>Show Approved</Nav.Link>
                     </Nav>
                     <Nav>
-                        <Nav.Link disabled>{user.userName}</Nav.Link>
+                        <Nav.Link href="#" onClick={onUserNameClick}>{user.userName}</Nav.Link>
+                        <EditUserModal showUser={showUser} setShowUser={setShowUser} myHooks={props.myHooks}/>
                         <Nav.Link href="/">Log out</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
