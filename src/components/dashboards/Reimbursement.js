@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from "axios";
 
 import Card from 'react-bootstrap/Card';
@@ -7,9 +7,13 @@ import Button from 'react-bootstrap/Button';
 import { URL } from "../../utils/backend";
 import { useHistory } from 'react-router';
 
+import ReceiptModal from '../ReceiptModal';
+
 const Reimbursement = (props) => {
 
     const {push} = useHistory();
+
+    const [showReciept, setShowReciept] = useState(false);
 
     const {reimb, managerFunc, myHooks} = props;
     const {isPending, isApproved, isDenied} = myHooks;
@@ -84,6 +88,11 @@ const Reimbursement = (props) => {
         setThisStatusId(2);
     }
 
+    const onClickShow = (event) => {
+        event.preventDefault();
+        setShowReciept(true);
+    }
+
     return (
     <div className={isDisplayed()}>
        <Card>
@@ -95,10 +104,18 @@ const Reimbursement = (props) => {
             <Card.Title>{rType[reimb.reimbTypeId]}</Card.Title>
             <Card.Subtitle className="mb-2 text-muted">{reimb.reimbSubmitted}</Card.Subtitle>
             <Card.Text>
-                {reimb.reimbDescription}
+                Description: {reimb.reimbDescription}
+            </Card.Text>
+            <Card.Text>
+                Ammount: {reimb.reimbAmount}
             </Card.Text>
         </Card.Body>
-        <Card.Footer className="text-muted">{reimb.reimbReceipt !== null ? "Receipt attached" : null}</Card.Footer>
+        <Card.Footer className="text-muted">{reimb.reimbReceipt !== null ?
+            <div>
+                <Button variant="primary" onClick={onClickShow}>Show Receipt</Button>
+                <ReceiptModal showReciept={showReciept} setShowReciept={setShowReciept} receipt={reimb.reimbReceipt}/>
+            </div> : null}
+        </Card.Footer>
         {(myHooks.user.userRoleId === 2 && reimb.reimbStatusId === 3) ?
             <div>
                 <Button variant="primary" onClick={onClickApprove}>Approve</Button>

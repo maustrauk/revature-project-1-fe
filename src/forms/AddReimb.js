@@ -123,7 +123,7 @@ const AddReimb = (props) => {
                                 <Form.Label className="form-label">
                                    Reciept:
                                 </Form.Label>
-                                <Form.Control type="file" name="reimbReceipt" onChange={changeHandler}/>
+                                <Form.Control type="file" name="reimbReceipt" accept="image/jpeg" onChange={changeHandler}/>
                             </Form.Group>
                             <Form.Group className="col-12">
                                         <Form.Label className="form-label">
