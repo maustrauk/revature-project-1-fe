@@ -4,6 +4,7 @@ import axios from "axios";
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Alert from 'react-bootstrap/Alert';
 
 import logo from '../assets/logo.svg';
 import { URL } from "../utils/backend";
@@ -122,7 +123,7 @@ const SignUp = (props) => {
                                         <Form.Control type="email" name="userEmail" placeholder="email@example.com" value={userData.userEmail} onChange={changeHandler}  required/>
                                     </Form.Group>
                                 </Container>
-                                {myHooks.wrongCred ? <p className="errors">User Name already exist</p> : null}
+                                <Alert variant="danger" show={myHooks.wrongCred}>User Name already exist</Alert>
                                 <hr className="my-4"/>
                                 <Container className="buttons">
                                     <Button variant="primary" type="submit">

@@ -1,7 +1,7 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 
-const Footer = (props) => {
+const MyFooter = (props) => {
     return(
         <Container className="footer">
             <p class="mb-1">&copy; 2021 ERS</p>
@@ -9,5 +9,5 @@ const Footer = (props) => {
     );
 }
 
-export default Footer;
+export default MyFooter;
 

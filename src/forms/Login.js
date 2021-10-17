@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Alert from 'react-bootstrap/Alert';
 
 import logo from '../assets/logo.svg';
 
@@ -89,7 +91,7 @@ const Login = (props) => {
                         <Form.Group className="mb-3">
                             <Form.Control type="password" name="userPassword" placeholder="Enter Password" value={userData.userPassword} onChange={changeHandler} required/>
                         </Form.Group>
-                        {myHooks.wrongCred ? <p className="errors">Wrong username and/or password</p> : null}
+                        <Alert variant="danger" show={myHooks.wrongCred}>Wrong User Name and/or Password</Alert>
                         <hr className="my-4"/>
                         <Container className="buttons">
                             <Button variant="primary" type="submit">
