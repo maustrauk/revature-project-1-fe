@@ -3,7 +3,7 @@ import axios from "axios";
 
 import { URL } from '../../utils/backend';
 
-import Loading from '../Loading';
+import Loading from '../modals/Loading';
 import Reimbursements from './Reimbursements';
 
 
@@ -31,7 +31,8 @@ const EmployeeDashboard = (props) => {
 
     return (
     <div>
-        {isLoading ? <Loading/> : <Reimbursements myHooks={props.myHooks}/>}
+        <Loading isLoading={isLoading}/>
+        <Reimbursements myHooks={props.myHooks}/>
     </div>);
 }
 

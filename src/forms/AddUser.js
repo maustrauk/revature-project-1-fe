@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import axios from "axios";
-import emailjs from 'emailjs-com';
 
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -10,8 +9,9 @@ import logo from '../assets/logo.svg';
 import { URL } from "../utils/backend";
 import { useHistory } from "react-router";
 
-import Loading from "../components/Loading";
+import Loading from "../components/modals/Loading";
 
+import sendEmail from '../utils/emailSender';
 
 const AddUser = (props) => {
 
@@ -49,7 +49,7 @@ const AddUser = (props) => {
                 if (data !== null) {
                     myHooks.setWrongCred(false);
                     myHooks.setIsLoading(false);
-                    sendEmail(userData);
+                    sendEmail(userData, myHooks.user.userFirstName, 1);
                     push('/dashboard');
                 } else {
                     myHooks.setWrongCred(true);
@@ -82,30 +82,9 @@ const AddUser = (props) => {
         push('/dashboard');
     };
 
-    const sendEmail = (data) => {
-
-        console.log(data);
-
-        emailjs.init(process.env.REACT_APP_USER_ID);
-
-        const templateParams = {
-            to_name: data.userFirstName,
-            from_name: myHooks.user.userFirstName,
-            user_name: data.userName,
-            password: data.userPassword,
-            to_address: data.userEmail
-        };
-        
-        emailjs.send(process.env.REACT_APP_SERVICE_ID,process.env.REACT_APP_TEMPLATE_ID, templateParams )
-            .then((response) => {
-               console.log('SUCCESS!', response.status, response.text);
-            }, (err) => {
-               console.log('FAILED...', err);
-            }); 
-    }
 
     return (<div>
-        {myHooks.isLoading ? <Loading/> :
+        <Loading isLoading={myHooks.isLoading}/>
                 <Container className="form-signup">
                     <Container className="py-5 text-center" >
                         <img className="d-block mx-auto mb-4" src={logo} alt="logo" width="72" height="93"/>
@@ -163,7 +142,6 @@ const AddUser = (props) => {
                         </Container> 
                     </Container>
                 </Container>
-            }
     </div>);
 }
 
