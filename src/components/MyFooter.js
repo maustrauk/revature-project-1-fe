@@ -1,13 +1,13 @@
 import React from "react";
-import { Container } from "react-bootstrap";
+import { MDBFooter } from "mdbreact";
+
 
 const MyFooter = (props) => {
     return(
-        <Container className="footer">
-            <p class="mb-1">&copy; 2021 ERS</p>
-        </Container>
+        <MDBFooter className="font-small pt-4 mt-4 text-center">
+            <p className="text-dark fw-bold fs-4">&copy; {new Date().getFullYear()} ERS</p>
+        </MDBFooter>
     );
 }
 
 export default MyFooter;
-
