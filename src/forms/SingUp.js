@@ -9,7 +9,7 @@ import logo from '../assets/logo.svg';
 import { URL } from "../utils/backend";
 import { useHistory } from "react-router";
 
-import Loading from "../components/Loading";
+import Loading from "../components/modals/Loading";
 
 import sendEmail from "../utils/emailSender";
 
@@ -79,7 +79,7 @@ const SignUp = (props) => {
 
     return (
         <div>
-            {myHooks.isLoading ? <Loading/> :
+            <Loading isLoading={myHooks.isLoading}/> 
                 <Container className="form-signup">
                     <Container className="py-5 text-center" >
                         <img className="d-block mx-auto mb-4" src={logo} alt="logo" width="72" height="93"/>
@@ -113,7 +113,7 @@ const SignUp = (props) => {
                                         <Form.Label className="form-label">
                                             Password:
                                         </Form.Label>
-                                        <Form.Control type="text" name="userPassword" placeholder="Password" value={userData.userPassword} onChange={changeHandler}  required/>
+                                        <Form.Control type="password" name="userPassword" placeholder="Password" value={userData.userPassword} onChange={changeHandler}  required/>
                                     </Form.Group>
                                     <Form.Group className="col-12">
                                         <Form.Label className="form-label">
@@ -136,7 +136,6 @@ const SignUp = (props) => {
                         </Container> 
                     </Container>
                 </Container>
-            }
         </div>);
 }
 

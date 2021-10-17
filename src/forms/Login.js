@@ -9,7 +9,7 @@ import logo from '../assets/logo.svg';
 
 import { URL } from "../utils/backend";
 
-import Loading from "../components/Loading";
+import Loading from "../components/modals/Loading";
 
 const initialUserData = {
     userName: "",
@@ -78,7 +78,7 @@ const Login = (props) => {
 
     return(
         <div>
-            {myHooks.isLoading ? <Loading/> :
+            <Loading isLoading={myHooks.isLoading}/>
                 <Container className="form-signin">
                     <Form onSubmit={submitHandler} noValidate validated={validated}>
                         <img className="mb-4" src={logo} alt="logo" width="72" height="93" />
@@ -101,7 +101,6 @@ const Login = (props) => {
                         </Container>
                     </Form>
                 </Container>
-            }
         </div>
     );
 }

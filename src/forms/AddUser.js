@@ -9,7 +9,7 @@ import logo from '../assets/logo.svg';
 import { URL } from "../utils/backend";
 import { useHistory } from "react-router";
 
-import Loading from "../components/Loading";
+import Loading from "../components/modals/Loading";
 
 import sendEmail from '../utils/emailSender';
 
@@ -84,7 +84,7 @@ const AddUser = (props) => {
 
 
     return (<div>
-        {myHooks.isLoading ? <Loading/> :
+        <Loading isLoading={myHooks.isLoading}/>
                 <Container className="form-signup">
                     <Container className="py-5 text-center" >
                         <img className="d-block mx-auto mb-4" src={logo} alt="logo" width="72" height="93"/>
@@ -142,7 +142,6 @@ const AddUser = (props) => {
                         </Container> 
                     </Container>
                 </Container>
-            }
     </div>);
 }
 

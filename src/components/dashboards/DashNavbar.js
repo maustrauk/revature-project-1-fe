@@ -9,7 +9,7 @@ import EditUserModal from '../modals/EditUserModal';
 
 const DashNavbar = (props) => {
 
-    const {user, setUser, setIsPending, setIsApproved, setIsDenied} = props.myHooks;
+    const {user, setIsPending, setIsApproved, setIsDenied} = props.myHooks;
 
     const {push} = useHistory();
 

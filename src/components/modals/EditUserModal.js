@@ -5,10 +5,10 @@ import { useHistory } from "react-router";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-
 import sendEmail from '../../utils/emailSender';
 import { URL } from '../../utils/backend';
 import { Container } from 'react-bootstrap';
+
 
 const EditUserModal = (props) => {
 
@@ -16,7 +16,7 @@ const EditUserModal = (props) => {
 
     const {push} = useHistory();
 
-    const [userData, setUserData] = useState(myHooks.user);
+    const [userData, setUserData] = useState({...myHooks.user});
     const [validated, setValidated] = useState(false);
 
     const handleClose = (event) => {
@@ -37,6 +37,7 @@ const EditUserModal = (props) => {
         if (form.checkValidity() === false) {
             event.stopPropagation();
           } else {
+            setShowUser(false);
             myHooks.setIsLoading(true);
             axios
             .post(`${URL}edit.user`, userData)
@@ -51,6 +52,7 @@ const EditUserModal = (props) => {
                 } else {
                     myHooks.setWrongCred(true);
                     myHooks.setIsLoading(false);
+                    setShowUser(true);
                 }
                 
             })
@@ -64,47 +66,48 @@ const EditUserModal = (props) => {
     };
 
     return (
-    <Modal show={showUser}>
-       <Modal.Header>
-          <Modal.Title>User name: {myHooks.user.userName}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-            <Form onSubmit={submitHandler} noValidate validated={validated}>
-                <Form.Group className="col-sm-6">
-                    <Form.Label className="form-label">
-                        First name:
-                    </Form.Label>
-                    <Form.Control type="text" name="userFirstName" placeholder="First Name" value={userData.userFirstName} onChange={changeHandler}  required/>
-                </Form.Group>
-                <Form.Group className="col-sm-6">
-                    <Form.Label className="form-label">
-                        Last name:
-                    </Form.Label>
-                    <Form.Control type="text" name="userLastName" placeholder="Last Name" value={userData.userLastName} onChange={changeHandler}  required/>
-                </Form.Group>
-                <Form.Group className="col-12">
-                    <Form.Label className="form-label">
-                    Password:
-                    </Form.Label>
-                    <Form.Control type="text" name="userPassword" placeholder="Password hiden" value={userData.userPassword} onChange={changeHandler}  required/>
-                </Form.Group>
-                <Form.Group className="col-12">
-                    <Form.Label className="form-label">
-                        Email:
-                    </Form.Label>
-                    <Form.Control type="email" name="userEmail" placeholder="email@example.com" value={userData.userEmail} onChange={changeHandler}  required/>
-                </Form.Group>
-                <Container>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Close
-                    </Button>
-                    <Button variant="primary" type="submit">
-                        Save Changes
-                    </Button>
-                </Container>
-            </Form>
-        </Modal.Body>
-    </Modal>);
+                <Modal show={showUser}>
+                    <Modal.Header>
+                        <Modal.Title>User name: {myHooks.user.userName}</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Form onSubmit={submitHandler} noValidate validated={validated}>
+                            <Form.Group className="col-sm-6">
+                                <Form.Label className="form-label">
+                                    First name:
+                                </Form.Label>
+                                <Form.Control type="text" name="userFirstName" placeholder="First Name" value={userData.userFirstName} onChange={changeHandler}  required/>
+                            </Form.Group>
+                            <Form.Group className="col-sm-6">
+                                <Form.Label className="form-label">
+                                    Last name:
+                                </Form.Label>
+                                <Form.Control type="text" name="userLastName" placeholder="Last Name" value={userData.userLastName} onChange={changeHandler}  required/>
+                            </Form.Group>
+                            <Form.Group className="col-12">
+                                <Form.Label className="form-label">
+                                Password:
+                                </Form.Label>
+                                <Form.Control type="password" name="userPassword" placeholder="Password hiden" value={userData.userPassword} onChange={changeHandler}  required/>
+                            </Form.Group>
+                            <Form.Group className="col-12">
+                                <Form.Label className="form-label">
+                                    Email:
+                                </Form.Label>
+                                <Form.Control type="email" name="userEmail" placeholder="email@example.com" value={userData.userEmail} onChange={changeHandler}  required/>
+                            </Form.Group>
+                            <Container>
+                                <Button variant="secondary" onClick={handleClose}>
+                                    Close
+                                </Button>
+                                <Button variant="primary" type="submit">
+                                    Save Changes
+                                </Button>
+                            </Container>
+                        </Form>
+                    </Modal.Body>
+                </Modal>
+    );
 }
 
 export default EditUserModal;
