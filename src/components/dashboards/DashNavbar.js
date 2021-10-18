@@ -68,9 +68,9 @@ const DashNavbar = (props) => {
 
     return (
     <div>
-        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-            <Container>
-                <Navbar.Brand href="#" onClick={onBrandClick}>Project 1</Navbar.Brand>
+        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" className="py-4">
+            <Container className="fs-5 font-weight-bold">
+                <Navbar.Brand href="#" onClick={onBrandClick}>ERS</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">

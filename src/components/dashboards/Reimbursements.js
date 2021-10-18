@@ -1,14 +1,15 @@
 import React from 'react';
 
+import Container from 'react-bootstrap/Container';
+
 import Reimbursement from './Reimbursement';
 
 const Reimbursements = (props) => {
     const {reimbList} = props.myHooks;
     return (
-    <div>
-        Reimb List:
+    <Container className="d-flex flex-wrap justify-content-evenly">
         {reimbList.map(element => <Reimbursement key={element.reimbId} reimb={element} myHooks={props.myHooks}/>)}
-    </div>);
+    </Container>);
 }
 
 export default Reimbursements;

@@ -135,11 +135,11 @@ const AddReimb = (props) => {
                         </Container>
                         <Alert variant="danger" show={wrongCred}>Wrong Manager User Name</Alert>
                         <hr className="my-4"/>
-                        <Container className="buttons">
-                            <Button variant="primary" type="submit">
+                        <Container className="d-flex justify-content-center mb-2">
+                            <Button variant="primary" type="submit" className="w-25">
                                 Add Reimbursement
                             </Button>
-                            <Button variant="secondary" onClick={onBackClick}>
+                            <Button variant="secondary" onClick={onBackClick} className="w-25">
                                 Back to Dashboard
                             </Button>
                         </Container>

@@ -81,15 +81,15 @@ const SignUp = (props) => {
     return (
         <div>
             <Loading isLoading={myHooks.isLoading}/> 
-                <Container className="form-signup">
+                <Container>
                     <Container className="py-5 text-center" >
                         <img className="d-block mx-auto mb-4" src={logo} alt="logo" width="72" height="93"/>
-                        <h2>Sign up form</h2>
+                        <h2 className="fs-1">Sign up form</h2>
                         <p className="lead">Please enter yours personal information</p>
                     </Container>
                     <Container className="row g-5">
                         <Container className="col-md-12 col-lg-12">
-                            <h4 className="mb-3">Personal information</h4>
+                            <h4 className="mb-3 text-center fs-2">Personal information</h4>
                             <Form onSubmit={submitHandler} noValidate validated={validated}>
                                 <Container className="row g-3">            
                                     <Form.Group className="col-sm-6">
@@ -123,14 +123,14 @@ const SignUp = (props) => {
                                         <Form.Control type="email" name="userEmail" placeholder="email@example.com" value={userData.userEmail} onChange={changeHandler}  required/>
                                     </Form.Group>
                                 </Container>
-                                <Alert variant="danger" show={myHooks.wrongCred}>User Name already exist</Alert>
                                 <hr className="my-4"/>
-                                <Container className="buttons">
+                                <Alert variant="danger" show={myHooks.wrongCred} className="text-center mr-5 ml-5">User Name already exist</Alert>
+                                <Container className="d-flex justify-content-center">
                                     <Button variant="primary" type="submit">
-                                        Sign Up
+                                        Sign
                                     </Button>
                                     <Button variant="secondary" onClick={onBackClick}>
-                                        Back to Login
+                                        Back
                                     </Button>
                                 </Container>
                             </Form>

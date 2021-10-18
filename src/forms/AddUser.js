@@ -131,11 +131,11 @@ const AddUser = (props) => {
                             </Form.Group>
                                 <Alert variant="danger" show={myHooks.wrongCred}>User Name already exist</Alert>
                                 <hr className="my-4"/>
-                                <Container className="buttons">
-                                    <Button variant="primary" type="submit">
+                                <Container className="d-flex justify-content-center mb-2">
+                                    <Button variant="primary" type="submit" className="w-25">
                                        Add User
                                     </Button>
-                                    <Button variant="secondary" onClick={onBackClick}>
+                                    <Button variant="secondary" onClick={onBackClick} className="w-25">
                                         Back to dashboard
                                     </Button>
                                 </Container>
