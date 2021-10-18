@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Alert from 'react-bootstrap/Alert';
 
 import logo from '../assets/logo.svg';
 
@@ -73,25 +75,28 @@ const Login = (props) => {
 
     const onSignUpClick = (event) => {
         event.preventDefault();
+        myHooks.setWrongCred(false);
         push('/signup');
     }
 
     return(
         <div>
             <Loading isLoading={myHooks.isLoading}/>
-                <Container className="form-signin">
+                <Container className="p-5">
                     <Form onSubmit={submitHandler} noValidate validated={validated}>
                         <img className="mb-4" src={logo} alt="logo" width="72" height="93" />
                         <h1 className="h3 mb-3 fw-normal">Please sign in:</h1>
-                        <Form.Group className="mb-3">
-                            <Form.Control type="text" name="userName" placeholder="Enter User Name" value={userData.userName} onChange={changeHandler}  required/>
-                        </Form.Group>
-                        <Form.Group className="mb-3">
-                            <Form.Control type="password" name="userPassword" placeholder="Enter Password" value={userData.userPassword} onChange={changeHandler} required/>
-                        </Form.Group>
-                        {myHooks.wrongCred ? <p className="errors">Wrong username and/or password</p> : null}
-                        <hr className="my-4"/>
-                        <Container className="buttons">
+                        <Container className="d-flex flex-column w-50 align-items-center">
+                            <Form.Group className="mb-3 w-50 ml-5">
+                                <Form.Control type="text" name="userName" placeholder="Enter User Name" value={userData.userName} onChange={changeHandler}  required/>
+                            </Form.Group>
+                            <Form.Group className="mb-3 w-50 ml-5">
+                                <Form.Control type="password" name="userPassword" placeholder="Enter Password" value={userData.userPassword} onChange={changeHandler} required/>
+                            </Form.Group>
+                        </Container>
+                        <Alert variant="danger" show={myHooks.wrongCred}>Wrong User Name and/or Password</Alert>
+                        <hr className="my-hr"/>
+                        <Container className="ml-3">
                             <Button variant="primary" type="submit">
                                 Sign In
                             </Button>

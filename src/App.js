@@ -8,6 +8,7 @@ import SignUp from "./forms/SingUp";
 import AddReimb from "./forms/AddReimb";
 import AddUser from "./forms/AddUser";
 import PrivateRoute from "./components/PrivateRoute";
+import MyFooter from "./components/MyFooter";
 
 const initUser = {
   userId: "",
@@ -64,7 +65,7 @@ function App() {
           </Route>
         </Switch>
       </Router>
-
+      <MyFooter/>
     </div>
   );
 }

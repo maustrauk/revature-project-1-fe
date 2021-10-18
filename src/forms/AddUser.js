@@ -4,6 +4,7 @@ import axios from "axios";
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Alert from 'react-bootstrap/Alert';
 
 import logo from '../assets/logo.svg';
 import { URL } from "../utils/backend";
@@ -128,13 +129,13 @@ const AddUser = (props) => {
                                 <Form.Check type="radio" name="userRoleId" onChange={changeHandler} value={1} label="Manager" />
                                 <Form.Check type="radio" name="userRoleId" onChange={changeHandler} value={2} label="Employee" checked/>
                             </Form.Group>
-                                {myHooks.wrongCred ? <p className="errors">User Name already exist</p> : null}
+                                <Alert variant="danger" show={myHooks.wrongCred}>User Name already exist</Alert>
                                 <hr className="my-4"/>
-                                <Container className="buttons">
-                                    <Button variant="primary" type="submit">
+                                <Container className="d-flex justify-content-center mb-2">
+                                    <Button variant="primary" type="submit" className="w-25">
                                        Add User
                                     </Button>
-                                    <Button variant="secondary" onClick={onBackClick}>
+                                    <Button variant="secondary" onClick={onBackClick} className="w-25">
                                         Back to dashboard
                                     </Button>
                                 </Container>
