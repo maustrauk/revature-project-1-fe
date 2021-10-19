@@ -66,7 +66,7 @@ const EditUserModal = (props) => {
     };
 
     return (
-                <Modal show={showUser}>
+                <Modal show={showUser} animation={false}>
                     <Modal.Header>
                         <Modal.Title>User name: {myHooks.user.userName}</Modal.Title>
                     </Modal.Header>

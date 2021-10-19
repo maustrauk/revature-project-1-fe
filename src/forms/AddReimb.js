@@ -103,7 +103,7 @@ const AddReimb = (props) => {
                                 <Form.Label className="form-label">
                                    Reimbursement Amount:
                                 </Form.Label>
-                                <Form.Control type="number" name="reimbAmount" min="0" value={reimbData.reimbAmount} onChange={changeHandler}  required/>
+                                <Form.Control type="number" name="reimbAmount" min="0.01" step="0.01" value={reimbData.reimbAmount} onChange={changeHandler}  required/>
                             </Form.Group>
                             <Form.Group className="col-12">
                                 <Form.Label className="form-label">

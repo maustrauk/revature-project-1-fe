@@ -9,7 +9,7 @@ const ReceiptModal = (props) => {
     const handleClose = () => setShowReciept(false);
 
     return (
-    <Modal show={showReciept} onHide={handleClose}>
+    <Modal show={showReciept} onHide={handleClose} animation={false}>
        <Modal.Header closeButton>
           <Modal.Title>Receipt</Modal.Title>
         </Modal.Header>
