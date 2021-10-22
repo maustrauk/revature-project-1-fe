@@ -126,8 +126,8 @@ const AddUser = (props) => {
                                 <Form.Label className="form-label">
                                    Reimbursement Type:
                                 </Form.Label>
-                                <Form.Check type="radio" name="userRoleId" onChange={changeHandler} value={1} label="Manager" />
-                                <Form.Check type="radio" name="userRoleId" onChange={changeHandler} value={2} label="Employee" checked/>
+                                <Form.Check type="radio" name="userRoleId" onChange={changeHandler} value={2} label="Manager" />
+                                <Form.Check type="radio" name="userRoleId" onChange={changeHandler} value={1} label="Employee" checked/>
                             </Form.Group>
                                 <Alert variant="danger" show={myHooks.wrongCred}>User Name already exist</Alert>
                                 <hr className="my-4"/>

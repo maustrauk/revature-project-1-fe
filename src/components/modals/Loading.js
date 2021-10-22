@@ -8,7 +8,7 @@ const Loading = (props) => {
     const {isLoading} = props;
 
     return (
-        <Modal show={isLoading} >
+        <Modal show={isLoading} animation={false}>
             <Modal.Body>
                 <div className="text-center">
                     <Spinner animation="border" role="status">
