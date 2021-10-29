@@ -4,4 +4,4 @@ The Expense Reimbursement System (ERS) will manage the process of reimbursing em
 ## Environment / Technologies
 Java, JavaScript, HTML, CSS, JDBC, AWS RDS, PostgreSQL
 
-### [Back End URL](https://github.com/maustrauk/revature-project-1)
+### [Back End URL](https://github.com/maustrauk/revature-ERS)
