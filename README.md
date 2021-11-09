@@ -5,7 +5,7 @@ The Expense Reimbursement System (ERS) will manage the process of reimbursing em
 
 ## Technologies Used
 * HTML version 5
-* CSS version 2.1
+* CSS version 3
 * JavaScript version ECMAScript 2018
 * ReactJS version 17.0.2
 
