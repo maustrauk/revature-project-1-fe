@@ -31,6 +31,13 @@ const Login = (props) => {
         const form = event.currentTarget;
         event.preventDefault();
 
+        // let config = {
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         'Access-Control-Allow-Origin': '*'
+        //     }
+        //   }
+
         if (form.checkValidity() === false) {
             event.stopPropagation();
           } else {
