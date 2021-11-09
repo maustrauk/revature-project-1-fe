@@ -11,12 +11,12 @@ The Expense Reimbursement System (ERS) will manage the process of reimbursing em
 
 ## Features
 List of features ready:
-
-To-do list:
+* 
 
 ## Getting Started
-To upload this project you need to clone this repository using `git clone https://github.com/maustrauk/revature-project-ERS-fe.git`\
-Make sure do download and install [back-end](https://github.com/maustrauk/revature-ERS)
+1. Make sure do download and install [back-end](https://github.com/maustrauk/revature-ERS)
+2. To upload this project you need to clone this repository using `git clone https://github.com/maustrauk/revature-project-ERS-fe.git`\
+3. 
 
 ## Usage
 
