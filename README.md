@@ -36,7 +36,8 @@ REACT_APP_TEMPLATE_ID_2={EmailJS template id #2}
 6. In your IDE run `npm start` command.
 
 ## Usage
-
+After launching this application you should see on `localhost:3000`:
+![Application welcome screen screenshot](/screen_shot_1.jpg?raw=true)
 
 
 ## License
